@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AestheticPhoneSQ - Mobile App Development Studio</title>
+    <meta name="description" content="AestheticPhoneSQ is an independent software studio specializing in mobile application development for Android and iOS.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5a4bd1;
+            --accent: #a29bfe;
+            --bg: #0f0e17;
+            --bg-card: #1a1928;
+            --text: #fffffe;
+            --text-muted: #94a1b2;
+            --border: #2e2d3d;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 14, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--accent); }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        /* Hero */
+        .hero {
+            padding: 10rem 2rem 6rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent), #74b9ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 0.5rem 1.25rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        /* Section */
+        section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        /* Apps Grid */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .app-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .app-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .app-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .app-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .app-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .app-tag {
+            display: inline-block;
+            background: rgba(108, 92, 231, 0.15);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+
+        .app-store-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .app-store-link:hover { text-decoration: underline; }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .about-item {
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .about-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Contact */
+        .contact {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-email {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.75rem 2rem;
+            background: var(--primary);
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .contact-email:hover { background: var(--primary-dark); }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        footer a:hover { color: var(--text); }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 8rem 1.5rem 4rem; }
+            .nav-links a { margin-left: 1rem; font-size: 0.85rem; }
+            .logo { font-size: 1.1rem; }
+            section { padding: 3rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo">Aesthetic<span>PhoneSQ</span></a>
+            <div class="nav-links">
+                <a href="#apps">Apps</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="badge">Independent Software Studio</div>
+        <h1>Crafting <span>Mobile Experiences</span> That Matter</h1>
+        <p>We design and develop mobile applications for Android and iOS, focusing on intuitive user experiences and polished design.</p>
+    </div>
+
+    <section id="apps">
+        <h2 class="section-title">Our Apps</h2>
+        <p class="section-subtitle">Published applications available on Google Play Store.</p>
+
+        <div class="apps-grid">
+            <div class="app-card">
+                <div class="app-icon" style="background: linear-gradient(135deg, #6c5ce7, #a29bfe);">&#127858;</div>
+                <h3>CauldronCrush</h3>
+                <p>A casual puzzle game where you brew magical potions by matching ingredients. Tap groups, complete recipes, and master the art of alchemy.</p>
+                <div>
+                    <span class="app-tag">Puzzle</span>
+                    <span class="app-tag">Casual</span>
+                    <span class="app-tag">Android</span>
+                </div>
+                <a href="https://play.google.com/store/apps/details?id=com.aestheticphonesq.brewburst" class="app-store-link" target="_blank" rel="noopener">View on Google Play &rarr;</a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-icon" style="background: linear-gradient(135deg, #00b894, #55efc4);">&#128248;</div>
+                <h3>More Coming Soon</h3>
+                <p>We are actively developing new applications. Stay tuned for upcoming releases across various categories.</p>
+                <div>
+                    <span class="app-tag">In Development</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">What We Do</h2>
+        <p class="section-subtitle">We are a software development studio based in Turkey, building mobile apps for a global audience.</p>
+
+        <div class="about-grid">
+            <div class="about-item">
+                <div class="about-icon">&#128241;</div>
+                <h3>Mobile Development</h3>
+                <p>Native and cross-platform apps for Android and iOS using modern frameworks and tools.</p>
+            </div>
+            <div class="about-item">
+                <div class="about-icon">&#127912;</div>
+                <h3>UI/UX Design</h3>
+                <p>Clean, intuitive interfaces that prioritize user experience and accessibility.</p>
+            </div>
+            <div class="about-item">
+                <div class="about-icon">&#9889;</div>
+                <h3>AI Integration</h3>
+                <p>Leveraging artificial intelligence to create smarter, more personalized app experiences.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="contact" id="contact">
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-subtitle">Have a question or want to collaborate? Reach out to us.</p>
+        <a href="mailto:ufuksozubir@gmail.com" class="contact-email">ufuksozubir@gmail.com</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 AestheticPhoneSQ. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </p>
+    </footer>
+
+</body>
+</html>
